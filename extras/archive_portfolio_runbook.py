@@ -71,6 +71,12 @@ RUNBOOK_STEPS = [
         'output': 'ARCHIVE_PORTFOLIO_DASHBOARD.md',
         'purpose': 'Build the one-page final archive portfolio status dashboard.',
     },
+    {
+        'name': 'portfolio-digest',
+        'command': ['python', 'extras/archive_portfolio_digest.py', '--projects-root', '{projects_root}', '--out-json', 'archive_portfolio_digest.json', '--out-md', 'ARCHIVE_PORTFOLIO_DIGEST.md'],
+        'output': 'ARCHIVE_PORTFOLIO_DIGEST.md',
+        'purpose': 'Build the executive archive portfolio digest for final review.',
+    },
 ]
 
 
