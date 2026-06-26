@@ -142,6 +142,12 @@ TOOLS = {
         'description': 'Build one-page archive portfolio dashboard from summary, boards, packlist, index, and audit files',
         'area': 'portfolio',
     },
+    'portfolio-digest': {
+        'script': 'extras/archive_portfolio_digest.py',
+        'example': 'python extras/archive_portfolio_digest.py --projects-root projects --out-json archive_portfolio_digest.json --out-md ARCHIVE_PORTFOLIO_DIGEST.md',
+        'description': 'Build executive archive portfolio digest from dashboard, summary, packlist, and index files',
+        'area': 'portfolio',
+    },
 }
 
 
