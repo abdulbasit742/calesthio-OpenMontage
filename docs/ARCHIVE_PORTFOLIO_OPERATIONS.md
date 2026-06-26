@@ -14,12 +14,13 @@ The goal is to move from single-project archive files to portfolio-level visibil
 6. summarize the archive portfolio
 7. build a final portfolio packlist
 8. build a searchable portfolio index
-9. create a repeatable runbook
-10. use the CLI registry to inspect and call tools
+9. build a one-page portfolio dashboard
+10. create a repeatable runbook
+11. use the CLI registry to inspect and call tools
 
 ## Recommended Full Workflow
 
-Run the portfolio runbook generator first when you want a single Markdown command file. The runbook includes audit, plans, boards, summary, packlist, and final searchable index steps.
+Run the portfolio runbook generator first when you want a single Markdown command file. The runbook includes audit, plans, boards, summary, packlist, searchable index, and final dashboard steps.
 
 ```bash
 python extras/archive_portfolio_runbook.py --projects-root projects --client-name "Client Name" --sender-name "Your Name" --out-json archive_portfolio_runbook.json --out-md ARCHIVE_PORTFOLIO_RUNBOOK.md
@@ -123,6 +124,19 @@ Main output:
 - `archive_portfolio_index.json`
 - `ARCHIVE_PORTFOLIO_INDEX.md`
 
+## Portfolio Dashboard
+
+Use this as the final review screen after summary, packlist, index, boards, and audit files are generated. It combines those source files into one dashboard with status cards, missing source counts, attention counts, and next steps.
+
+```bash
+python extras/archive_portfolio_dashboard.py --projects-root projects --out-json archive_portfolio_dashboard.json --out-md ARCHIVE_PORTFOLIO_DASHBOARD.md
+```
+
+Main output:
+
+- `archive_portfolio_dashboard.json`
+- `ARCHIVE_PORTFOLIO_DASHBOARD.md`
+
 ## CLI Registry Usage
 
 The archive CLI can list, inspect, and generate command arrays for the archive tools.
@@ -136,9 +150,11 @@ python extras/archive_toolchain_cli.py list --area portfolio
 python extras/archive_toolchain_cli.py show portfolio-runbook
 python extras/archive_toolchain_cli.py show portfolio-packlist
 python extras/archive_toolchain_cli.py show portfolio-index
+python extras/archive_toolchain_cli.py show portfolio-dashboard
 python extras/archive_toolchain_cli.py command archive-completion-board --projects-root projects
 python extras/archive_toolchain_cli.py command portfolio-packlist --projects-root projects
 python extras/archive_toolchain_cli.py command portfolio-index --projects-root projects
+python extras/archive_toolchain_cli.py command portfolio-dashboard --projects-root projects
 ```
 
 ## Suggested Review Order
@@ -151,7 +167,8 @@ python extras/archive_toolchain_cli.py command portfolio-index --projects-root p
 6. Review `ARCHIVE_PORTFOLIO_SUMMARY.md`.
 7. Review `ARCHIVE_PORTFOLIO_PACKLIST.md`.
 8. Review `ARCHIVE_PORTFOLIO_INDEX.md`.
-9. Keep `ARCHIVE_PORTFOLIO_RUNBOOK.md` as the repeatable workflow reference.
+9. Review `ARCHIVE_PORTFOLIO_DASHBOARD.md`.
+10. Keep `ARCHIVE_PORTFOLIO_RUNBOOK.md` as the repeatable workflow reference.
 
 ## Expected Portfolio Files
 
@@ -177,17 +194,19 @@ The final archive portfolio workspace can contain these generated files:
 - `ARCHIVE_PORTFOLIO_PACKLIST.md`
 - `archive_portfolio_index.json`
 - `ARCHIVE_PORTFOLIO_INDEX.md`
+- `archive_portfolio_dashboard.json`
+- `ARCHIVE_PORTFOLIO_DASHBOARD.md`
 - `archive_portfolio_runbook.json`
 - `ARCHIVE_PORTFOLIO_RUNBOOK.md`
 
 ## Status Meaning
 
 - `ready`: all expected portfolio boards are available and no board needs attention.
-- `needs-attention`: at least one board, packlist item, or indexed file is missing or reports incomplete work.
+- `needs-attention`: at least one board, packlist item, indexed file, or dashboard source is missing or reports incomplete work.
 - `archive-ready`: a project or board is ready for archive review.
 - `complete`: the packlist or index found every expected portfolio and project file.
 - `incomplete`: completion checks found missing source files or unfinished closeout/feedback/archive items.
 
 ## Best Practice
 
-Run the individual project tools first, then run the board tools, then run the portfolio summary, then the portfolio packlist, and finally the portfolio index. This keeps board-level reports accurate and gives the team one searchable archive map at the end.
+Run the individual project tools first, then run the board tools, then run the portfolio summary, then the portfolio packlist, then the portfolio index, and finally the portfolio dashboard. This keeps board-level reports accurate and gives the team one final review screen at the end.
