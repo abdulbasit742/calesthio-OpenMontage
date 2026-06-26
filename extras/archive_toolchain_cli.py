@@ -136,6 +136,12 @@ TOOLS = {
         'description': 'Build searchable portfolio and project archive document index',
         'area': 'portfolio',
     },
+    'portfolio-dashboard': {
+        'script': 'extras/archive_portfolio_dashboard.py',
+        'example': 'python extras/archive_portfolio_dashboard.py --projects-root projects --out-json archive_portfolio_dashboard.json --out-md ARCHIVE_PORTFOLIO_DASHBOARD.md',
+        'description': 'Build one-page archive portfolio dashboard from summary, boards, packlist, index, and audit files',
+        'area': 'portfolio',
+    },
 }
 
 
