@@ -1,0 +1,132 @@
+#!/usr/bin/env python3
+import argparse
+import json
+from datetime import datetime, timezone
+from pathlib import Path
+
+EXPECTED_FILES = [
+    {'key': 'delivery_manifest', 'path': 'extras/delivery_manifest_builder.py', 'category': 'script'},
+    {'key': 'handoff_checklist', 'path': 'extras/delivery_handoff_checklist.py', 'category': 'script'},
+    {'key': 'client_email', 'path': 'extras/client_delivery_email_builder.py', 'category': 'script'},
+    {'key': 'client_feedback_tracker', 'path': 'extras/client_feedback_tracker.py', 'category': 'script'},
+    {'key': 'client_feedback_report', 'path': 'extras/client_feedback_report.py', 'category': 'script'},
+    {'key': 'project_closeout', 'path': 'extras/project_closeout_builder.py', 'category': 'script'},
+    {'key': 'closeout_ops', 'path': 'extras/closeout_ops_runner.py', 'category': 'script'},
+    {'key': 'archive_manifest', 'path': 'extras/project_archive_manifest.py', 'category': 'script'},
+    {'key': 'archive_ops', 'path': 'extras/archive_ops_runner.py', 'category': 'script'},
+    {'key': 'archive_status_board', 'path': 'extras/archive_status_board.py', 'category': 'script'},
+    {'key': 'portfolio_archive_plan', 'path': 'extras/portfolio_archive_plan.py', 'category': 'script'},
+    {'key': 'archive_toolchain_cli', 'path': 'extras/archive_toolchain_cli.py', 'category': 'script'},
+    {'key': 'archive_toolchain_guide', 'path': 'docs/ARCHIVE_TOOLCHAIN_GUIDE.md', 'category': 'docs'},
+]
+
+KEYWORDS = [
+    'delivery',
+    'handoff',
+    'feedback',
+    'closeout',
+    'archive',
+    'portfolio',
+]
+
+
+def read_text(path):
+    if not path.exists():
+        return ''
+    try:
+        return path.read_text(encoding='utf-8')
+    except UnicodeDecodeError:
+        return ''
+
+
+def file_row(item):
+    path = Path(item['path'])
+    text = read_text(path)
+    missing_keywords = [keyword for keyword in KEYWORDS if keyword not in text.lower()]
+    return {
+        'key': item['key'],
+        'category': item['category'],
+        'path': item['path'],
+        'exists': path.exists(),
+        'size_bytes': path.stat().st_size if path.exists() else 0,
+        'keyword_hits': [keyword for keyword in KEYWORDS if keyword in text.lower()],
+        'missing_keywords': missing_keywords,
+    }
+
+
+def build_audit():
+    rows = [file_row(item) for item in EXPECTED_FILES]
+    missing = [row for row in rows if not row['exists']]
+    docs = [row for row in rows if row['category'] == 'docs']
+    scripts = [row for row in rows if row['category'] == 'script']
+    status = 'passed' if not missing else 'needs-attention'
+    return {
+        'generated_on_utc': datetime.now(timezone.utc).isoformat(),
+        'status': status,
+        'expected_count': len(rows),
+        'script_count': len(scripts),
+        'docs_count': len(docs),
+        'missing_count': len(missing),
+        'available_count': len(rows) - len(missing),
+        'rows': rows,
+        'recommendations': recommendations(missing),
+    }
+
+
+def recommendations(missing):
+    if missing:
+        return [f"Create or restore missing file: {row['path']}" for row in missing]
+    return [
+        'Archive toolchain files are present.',
+        'Run archive_toolchain_cli.py list to inspect registered commands.',
+        'Run ARCHIVE_TOOLCHAIN_GUIDE.md workflow for final validation.',
+    ]
+
+
+def render_markdown(audit):
+    lines = [
+        '# Archive Toolchain Audit',
+        '',
+        f"Generated UTC: {audit['generated_on_utc']}",
+        f"Status: **{audit['status']}**",
+        f"Expected files: **{audit['expected_count']}**",
+        f"Available files: **{audit['available_count']}**",
+        f"Missing files: **{audit['missing_count']}**",
+        '',
+        '## Files',
+        '| Key | Category | Exists | Size | Keyword Hits | Path |',
+        '| --- | --- | --- | ---: | --- | --- |',
+    ]
+    for row in audit['rows']:
+        hits = ', '.join(row['keyword_hits']) or '-'
+        lines.append(f"| {row['key']} | {row['category']} | {row['exists']} | {row['size_bytes']} | {hits} | `{row['path']}` |")
+    lines.extend(['', '## Recommendations'])
+    for item in audit['recommendations']:
+        lines.append(f'- {item}')
+    lines.append('')
+    return '\n'.join(lines)
+
+
+def write_audit(out_json, out_md):
+    audit = build_audit()
+    json_path = Path(out_json)
+    md_path = Path(out_md)
+    json_path.parent.mkdir(parents=True, exist_ok=True)
+    md_path.parent.mkdir(parents=True, exist_ok=True)
+    json_path.write_text(json.dumps(audit, indent=2), encoding='utf-8')
+    md_path.write_text(render_markdown(audit), encoding='utf-8')
+    return {'json': str(json_path), 'markdown': str(md_path), 'status': audit['status']}
+
+
+def main():
+    parser = argparse.ArgumentParser(description='Audit the OpenMontage Plus archive toolchain files and guide coverage')
+    parser.add_argument('--out-json', default='archive_toolchain_audit.json')
+    parser.add_argument('--out-md', default='ARCHIVE_TOOLCHAIN_AUDIT.md')
+    args = parser.parse_args()
+
+    result = write_audit(args.out_json, args.out_md)
+    print(json.dumps(result, indent=2))
+
+
+if __name__ == '__main__':
+    main()
