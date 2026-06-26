@@ -1,0 +1,47 @@
+name: OpenMontage Plus Smoke Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Check Python syntax
+        run: |
+          python -m py_compile extras/project_starter.py
+          python -m py_compile extras/workspace_manager.py
+          python -m py_compile extras/export_presets.py
+          python -m py_compile extras/budget_gate.py
+          python -m py_compile extras/render_history.py
+          python -m py_compile extras/review_checklist.py
+          python -m py_compile extras/local_zero_cost.py
+          python -m py_compile extras/plus_cli.py
+
+      - name: Run Plus helper smoke commands
+        run: |
+          python extras/project_starter.py --name "Smoke Video" --duration 30 --platform youtube-shorts
+          python extras/workspace_manager.py summary
+          python extras/export_presets.py list
+          python extras/export_presets.py show --preset youtube-shorts
+          python extras/budget_gate.py --budget 1.00
+          python extras/render_history.py add --project smoke-video --status completed --duration-seconds 30 --cost-usd 0 --note smoke
+          python extras/render_history.py summary
+          python extras/review_checklist.py template --file projects/smoke-video/review_checklist.json
+          python extras/review_checklist.py check --file projects/smoke-video/review_checklist.json || true
+          python extras/local_zero_cost.py detect
+          python extras/plus_cli.py list
