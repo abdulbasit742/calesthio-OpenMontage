@@ -124,6 +124,12 @@ TOOLS = {
         'description': 'Build the complete safe archive portfolio runbook',
         'area': 'portfolio',
     },
+    'portfolio-packlist': {
+        'script': 'extras/archive_portfolio_packlist.py',
+        'example': 'python extras/archive_portfolio_packlist.py --projects-root projects --out-json archive_portfolio_packlist.json --out-md ARCHIVE_PORTFOLIO_PACKLIST.md',
+        'description': 'Build final portfolio and per-project archive file checklist',
+        'area': 'portfolio',
+    },
 }
 
 
