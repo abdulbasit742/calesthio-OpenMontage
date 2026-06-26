@@ -166,6 +166,12 @@ TOOLS = {
         'description': 'Build final archive portfolio release packet manifest from readiness and package files',
         'area': 'portfolio',
     },
+    'portfolio-handoff-note': {
+        'script': 'extras/archive_portfolio_handoff_note.py',
+        'example': 'python extras/archive_portfolio_handoff_note.py --projects-root projects --recipient-name Client --sender-name Team --handoff-label archive-portfolio-handoff --out-json archive_portfolio_handoff_note.json --out-md ARCHIVE_PORTFOLIO_HANDOFF_NOTE.md',
+        'description': 'Build archive portfolio handoff note from release packet, readiness review, and digest files',
+        'area': 'portfolio',
+    },
 }
 
 
