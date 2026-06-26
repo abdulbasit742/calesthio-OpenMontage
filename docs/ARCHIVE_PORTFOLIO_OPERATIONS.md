@@ -18,12 +18,13 @@ The goal is to move from single-project archive files to portfolio-level visibil
 10. build an executive portfolio digest
 11. build a timestamped portfolio snapshot
 12. build a final readiness review checklist
-13. create a repeatable runbook
-14. use the CLI registry to inspect and call tools
+13. build a final release packet manifest
+14. create a repeatable runbook
+15. use the CLI registry to inspect and call tools
 
 ## Recommended Full Workflow
 
-Run the portfolio runbook generator first when you want a single Markdown command file. The runbook includes audit, plans, boards, summary, packlist, searchable index, dashboard, executive digest, snapshot, and readiness review steps.
+Run the portfolio runbook generator first when you want a single Markdown command file. The runbook includes audit, plans, boards, summary, packlist, searchable index, dashboard, executive digest, snapshot, readiness review, and release packet steps.
 
 ```bash
 python extras/archive_portfolio_runbook.py --projects-root projects --client-name "Client Name" --sender-name "Your Name" --out-json archive_portfolio_runbook.json --out-md ARCHIVE_PORTFOLIO_RUNBOOK.md
@@ -179,6 +180,19 @@ Main output:
 - `archive_portfolio_readiness_review.json`
 - `ARCHIVE_PORTFOLIO_READINESS_REVIEW.md`
 
+## Portfolio Release Packet
+
+Use this after the readiness review is generated. It builds the final release packet manifest by checking all expected portfolio Markdown files and key source JSON files, then reports whether the archive portfolio is ready to package or still needs attention.
+
+```bash
+python extras/archive_portfolio_release_packet.py --projects-root projects --packet-label archive-portfolio-release --out-json archive_portfolio_release_packet.json --out-md ARCHIVE_PORTFOLIO_RELEASE_PACKET.md
+```
+
+Main output:
+
+- `archive_portfolio_release_packet.json`
+- `ARCHIVE_PORTFOLIO_RELEASE_PACKET.md`
+
 ## CLI Registry Usage
 
 The archive CLI can list, inspect, and generate command arrays for the archive tools.
@@ -196,6 +210,7 @@ python extras/archive_toolchain_cli.py show portfolio-dashboard
 python extras/archive_toolchain_cli.py show portfolio-digest
 python extras/archive_toolchain_cli.py show portfolio-snapshot
 python extras/archive_toolchain_cli.py show portfolio-readiness-review
+python extras/archive_toolchain_cli.py show portfolio-release-packet
 python extras/archive_toolchain_cli.py command archive-completion-board --projects-root projects
 python extras/archive_toolchain_cli.py command portfolio-packlist --projects-root projects
 python extras/archive_toolchain_cli.py command portfolio-index --projects-root projects
@@ -203,6 +218,7 @@ python extras/archive_toolchain_cli.py command portfolio-dashboard --projects-ro
 python extras/archive_toolchain_cli.py command portfolio-digest --projects-root projects
 python extras/archive_toolchain_cli.py command portfolio-snapshot --projects-root projects --label archive-portfolio-final
 python extras/archive_toolchain_cli.py command portfolio-readiness-review --projects-root projects
+python extras/archive_toolchain_cli.py command portfolio-release-packet --projects-root projects --packet-label archive-portfolio-release
 ```
 
 ## Suggested Review Order
@@ -219,7 +235,8 @@ python extras/archive_toolchain_cli.py command portfolio-readiness-review --proj
 10. Review `ARCHIVE_PORTFOLIO_DIGEST.md`.
 11. Review `ARCHIVE_PORTFOLIO_SNAPSHOT.md`.
 12. Review `ARCHIVE_PORTFOLIO_READINESS_REVIEW.md`.
-13. Keep `ARCHIVE_PORTFOLIO_RUNBOOK.md` as the repeatable workflow reference.
+13. Review `ARCHIVE_PORTFOLIO_RELEASE_PACKET.md`.
+14. Keep `ARCHIVE_PORTFOLIO_RUNBOOK.md` as the repeatable workflow reference.
 
 ## Expected Portfolio Files
 
@@ -253,14 +270,17 @@ The final archive portfolio workspace can contain these generated files:
 - `ARCHIVE_PORTFOLIO_SNAPSHOT.md`
 - `archive_portfolio_readiness_review.json`
 - `ARCHIVE_PORTFOLIO_READINESS_REVIEW.md`
+- `archive_portfolio_release_packet.json`
+- `ARCHIVE_PORTFOLIO_RELEASE_PACKET.md`
 - `archive_portfolio_runbook.json`
 - `ARCHIVE_PORTFOLIO_RUNBOOK.md`
 
 ## Status Meaning
 
 - `ready`: all expected portfolio boards are available and no board needs attention.
-- `needs-attention`: at least one board, packlist item, indexed file, dashboard source, digest source, or snapshot file is missing or reports incomplete work.
+- `needs-attention`: at least one board, packlist item, indexed file, dashboard source, digest source, snapshot file, or release packet file is missing or reports incomplete work.
 - `ready-for-final-review`: the readiness review found no missing source files and all checks passed.
+- `ready-to-package`: the release packet found all expected packet files and key source statuses are ready.
 - `needs-review`: the readiness review found missing source files or failed checks.
 - `archive-ready`: a project or board is ready for archive review.
 - `complete`: the packlist, index, or snapshot found every expected portfolio and project file.
@@ -268,4 +288,4 @@ The final archive portfolio workspace can contain these generated files:
 
 ## Best Practice
 
-Run the individual project tools first, then run the board tools, then run the portfolio summary, then the portfolio packlist, then the portfolio index, then the portfolio dashboard, then the portfolio digest, then the portfolio snapshot, and finally the readiness review. This keeps board-level reports accurate, gives leaders one short executive review file, records the final archive package state, and ends with one checklist that shows whether the package is ready for final human review.
+Run the individual project tools first, then run the board tools, then run the portfolio summary, then the portfolio packlist, then the portfolio index, then the portfolio dashboard, then the portfolio digest, then the portfolio snapshot, then the readiness review, and finally the release packet. This keeps board-level reports accurate, gives leaders one short executive review file, records the final archive package state, checks final readiness, and ends with one package manifest for handoff.
