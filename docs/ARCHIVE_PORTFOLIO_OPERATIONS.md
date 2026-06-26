@@ -12,12 +12,13 @@ The goal is to move from single-project archive files to portfolio-level visibil
 4. generate per-project completion reports
 5. build global completion boards
 6. summarize the archive portfolio
-7. create a repeatable runbook
-8. use the CLI registry to inspect and call tools
+7. build a final portfolio packlist
+8. create a repeatable runbook
+9. use the CLI registry to inspect and call tools
 
 ## Recommended Full Workflow
 
-Run the portfolio runbook generator first when you want a single Markdown command file.
+Run the portfolio runbook generator first when you want a single Markdown command file. The runbook includes audit, plans, boards, summary, and the final packlist step.
 
 ```bash
 python extras/archive_portfolio_runbook.py --projects-root projects --client-name "Client Name" --sender-name "Your Name" --out-json archive_portfolio_runbook.json --out-md ARCHIVE_PORTFOLIO_RUNBOOK.md
@@ -95,6 +96,19 @@ Main output:
 - `archive_portfolio_summary.json`
 - `ARCHIVE_PORTFOLIO_SUMMARY.md`
 
+## Portfolio Packlist
+
+Use this as the final packaging checklist after summary and board files are generated. It checks portfolio-level files and each project folder for expected delivery, feedback, closeout, archive, badge, and completion outputs.
+
+```bash
+python extras/archive_portfolio_packlist.py --projects-root projects --out-json archive_portfolio_packlist.json --out-md ARCHIVE_PORTFOLIO_PACKLIST.md
+```
+
+Main output:
+
+- `archive_portfolio_packlist.json`
+- `ARCHIVE_PORTFOLIO_PACKLIST.md`
+
 ## CLI Registry Usage
 
 The archive CLI can list, inspect, and generate command arrays for the archive tools.
@@ -106,7 +120,9 @@ python extras/archive_toolchain_cli.py list --area badge
 python extras/archive_toolchain_cli.py list --area completion
 python extras/archive_toolchain_cli.py list --area portfolio
 python extras/archive_toolchain_cli.py show portfolio-runbook
+python extras/archive_toolchain_cli.py show portfolio-packlist
 python extras/archive_toolchain_cli.py command archive-completion-board --projects-root projects
+python extras/archive_toolchain_cli.py command portfolio-packlist --projects-root projects
 ```
 
 ## Suggested Review Order
@@ -117,7 +133,8 @@ python extras/archive_toolchain_cli.py command archive-completion-board --projec
 4. Review `ARCHIVE_BADGE_BOARD.md`.
 5. Review `ARCHIVE_COMPLETION_BOARD.md`.
 6. Review `ARCHIVE_PORTFOLIO_SUMMARY.md`.
-7. Keep `ARCHIVE_PORTFOLIO_RUNBOOK.md` as the repeatable workflow reference.
+7. Review `ARCHIVE_PORTFOLIO_PACKLIST.md`.
+8. Keep `ARCHIVE_PORTFOLIO_RUNBOOK.md` as the repeatable workflow reference.
 
 ## Expected Portfolio Files
 
@@ -139,16 +156,19 @@ The final archive portfolio workspace can contain these generated files:
 - `ARCHIVE_COMPLETION_BOARD.md`
 - `archive_portfolio_summary.json`
 - `ARCHIVE_PORTFOLIO_SUMMARY.md`
+- `archive_portfolio_packlist.json`
+- `ARCHIVE_PORTFOLIO_PACKLIST.md`
 - `archive_portfolio_runbook.json`
 - `ARCHIVE_PORTFOLIO_RUNBOOK.md`
 
 ## Status Meaning
 
 - `ready`: all expected portfolio boards are available and no board needs attention.
-- `needs-attention`: at least one board is missing or reports incomplete work.
+- `needs-attention`: at least one board or packlist item is missing or reports incomplete work.
 - `archive-ready`: a project or board is ready for archive review.
+- `complete`: the packlist found every expected portfolio and project file.
 - `incomplete`: completion checks found missing source files or unfinished closeout/feedback/archive items.
 
 ## Best Practice
 
-Run the individual project tools first, then run the board tools, then run the portfolio summary. This keeps board-level reports accurate and avoids stale status files.
+Run the individual project tools first, then run the board tools, then run the portfolio summary, and finally run the portfolio packlist. This keeps board-level reports accurate and avoids stale status files.
