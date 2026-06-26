@@ -130,6 +130,12 @@ TOOLS = {
         'description': 'Build final portfolio and per-project archive file checklist',
         'area': 'portfolio',
     },
+    'portfolio-index': {
+        'script': 'extras/archive_portfolio_index.py',
+        'example': 'python extras/archive_portfolio_index.py --projects-root projects --out-json archive_portfolio_index.json --out-md ARCHIVE_PORTFOLIO_INDEX.md',
+        'description': 'Build searchable portfolio and project archive document index',
+        'area': 'portfolio',
+    },
 }
 
 
