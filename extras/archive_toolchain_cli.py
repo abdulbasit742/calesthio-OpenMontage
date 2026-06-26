@@ -172,6 +172,12 @@ TOOLS = {
         'description': 'Build archive portfolio handoff note from release packet, readiness review, and digest files',
         'area': 'portfolio',
     },
+    'portfolio-handoff-receipt': {
+        'script': 'extras/archive_portfolio_handoff_receipt.py',
+        'example': 'python extras/archive_portfolio_handoff_receipt.py --projects-root projects --recipient-name Client --sender-name Team --receipt-label archive-portfolio-receipt --out-json archive_portfolio_handoff_receipt.json --out-md ARCHIVE_PORTFOLIO_HANDOFF_RECEIPT.md',
+        'description': 'Build archive portfolio handoff receipt and acknowledgement record from handoff package files',
+        'area': 'portfolio',
+    },
 }
 
 
