@@ -67,7 +67,7 @@ TOOLS = {
     'portfolio-plan': {
         'script': 'extras/portfolio_archive_plan.py',
         'example': 'python extras/portfolio_archive_plan.py --projects-root projects',
-        'description': 'Build safe portfolio archive command plan',
+        'description': 'Build portfolio archive command plan',
         'area': 'portfolio',
     },
     'toolchain-audit': {
@@ -91,7 +91,7 @@ TOOLS = {
     'archive-badge-plan': {
         'script': 'extras/archive_badge_plan.py',
         'example': 'python extras/archive_badge_plan.py --projects-root projects',
-        'description': 'Build safe per-project archive badge command plan',
+        'description': 'Build per-project archive badge command plan',
         'area': 'badge',
     },
     'archive-completion': {
@@ -109,7 +109,7 @@ TOOLS = {
     'archive-completion-plan': {
         'script': 'extras/archive_completion_plan.py',
         'example': 'python extras/archive_completion_plan.py --projects-root projects',
-        'description': 'Build safe per-project archive completion command plan',
+        'description': 'Build per-project archive completion command plan',
         'area': 'completion',
     },
     'portfolio-summary': {
@@ -121,7 +121,7 @@ TOOLS = {
     'portfolio-runbook': {
         'script': 'extras/archive_portfolio_runbook.py',
         'example': 'python extras/archive_portfolio_runbook.py --projects-root projects --client-name Client --sender-name Team',
-        'description': 'Build the complete safe archive portfolio runbook',
+        'description': 'Build the complete archive portfolio runbook',
         'area': 'portfolio',
     },
     'portfolio-packlist': {
@@ -158,6 +158,12 @@ TOOLS = {
         'script': 'extras/archive_portfolio_readiness_review.py',
         'example': 'python extras/archive_portfolio_readiness_review.py --projects-root projects --reviewer-name Reviewer --review-note "Final package review" --out-json archive_portfolio_readiness_review.json --out-md ARCHIVE_PORTFOLIO_READINESS_REVIEW.md',
         'description': 'Build final archive portfolio readiness review checklist from snapshot, digest, and dashboard files',
+        'area': 'portfolio',
+    },
+    'portfolio-release-packet': {
+        'script': 'extras/archive_portfolio_release_packet.py',
+        'example': 'python extras/archive_portfolio_release_packet.py --projects-root projects --packet-label archive-portfolio-release --out-json archive_portfolio_release_packet.json --out-md ARCHIVE_PORTFOLIO_RELEASE_PACKET.md',
+        'description': 'Build final archive portfolio release packet manifest from readiness and package files',
         'area': 'portfolio',
     },
 }
