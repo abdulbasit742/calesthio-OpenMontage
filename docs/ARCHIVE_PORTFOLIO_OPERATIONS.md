@@ -17,12 +17,13 @@ The goal is to move from single-project archive files to portfolio-level visibil
 9. build a one-page portfolio dashboard
 10. build an executive portfolio digest
 11. build a timestamped portfolio snapshot
-12. create a repeatable runbook
-13. use the CLI registry to inspect and call tools
+12. build a final readiness review checklist
+13. create a repeatable runbook
+14. use the CLI registry to inspect and call tools
 
 ## Recommended Full Workflow
 
-Run the portfolio runbook generator first when you want a single Markdown command file. The runbook includes audit, plans, boards, summary, packlist, searchable index, dashboard, executive digest, and snapshot steps.
+Run the portfolio runbook generator first when you want a single Markdown command file. The runbook includes audit, plans, boards, summary, packlist, searchable index, dashboard, executive digest, snapshot, and readiness review steps.
 
 ```bash
 python extras/archive_portfolio_runbook.py --projects-root projects --client-name "Client Name" --sender-name "Your Name" --out-json archive_portfolio_runbook.json --out-md ARCHIVE_PORTFOLIO_RUNBOOK.md
@@ -154,7 +155,7 @@ Main output:
 
 ## Portfolio Snapshot
 
-Use this as the final freeze/record step after the digest is generated. It records expected Markdown and JSON portfolio outputs with existence, size, modified time, missing-file counts, and a timestamped snapshot label.
+Use this as the freeze/record step after the digest is generated. It records expected Markdown and JSON portfolio outputs with existence, size, modified time, missing-file counts, and a timestamped snapshot label.
 
 ```bash
 python extras/archive_portfolio_snapshot.py --projects-root projects --label archive-portfolio-final --out-json archive_portfolio_snapshot.json --out-md ARCHIVE_PORTFOLIO_SNAPSHOT.md
@@ -164,6 +165,19 @@ Main output:
 
 - `archive_portfolio_snapshot.json`
 - `ARCHIVE_PORTFOLIO_SNAPSHOT.md`
+
+## Portfolio Readiness Review
+
+Use this after the snapshot is generated. It checks the snapshot, digest, and dashboard source files, then creates one final readiness checklist with source statuses, passed checks, missing source counts, failed check counts, and source notes.
+
+```bash
+python extras/archive_portfolio_readiness_review.py --projects-root projects --reviewer-name "Reviewer Name" --review-note "Final package review" --out-json archive_portfolio_readiness_review.json --out-md ARCHIVE_PORTFOLIO_READINESS_REVIEW.md
+```
+
+Main output:
+
+- `archive_portfolio_readiness_review.json`
+- `ARCHIVE_PORTFOLIO_READINESS_REVIEW.md`
 
 ## CLI Registry Usage
 
@@ -181,12 +195,14 @@ python extras/archive_toolchain_cli.py show portfolio-index
 python extras/archive_toolchain_cli.py show portfolio-dashboard
 python extras/archive_toolchain_cli.py show portfolio-digest
 python extras/archive_toolchain_cli.py show portfolio-snapshot
+python extras/archive_toolchain_cli.py show portfolio-readiness-review
 python extras/archive_toolchain_cli.py command archive-completion-board --projects-root projects
 python extras/archive_toolchain_cli.py command portfolio-packlist --projects-root projects
 python extras/archive_toolchain_cli.py command portfolio-index --projects-root projects
 python extras/archive_toolchain_cli.py command portfolio-dashboard --projects-root projects
 python extras/archive_toolchain_cli.py command portfolio-digest --projects-root projects
 python extras/archive_toolchain_cli.py command portfolio-snapshot --projects-root projects --label archive-portfolio-final
+python extras/archive_toolchain_cli.py command portfolio-readiness-review --projects-root projects
 ```
 
 ## Suggested Review Order
@@ -202,7 +218,8 @@ python extras/archive_toolchain_cli.py command portfolio-snapshot --projects-roo
 9. Review `ARCHIVE_PORTFOLIO_DASHBOARD.md`.
 10. Review `ARCHIVE_PORTFOLIO_DIGEST.md`.
 11. Review `ARCHIVE_PORTFOLIO_SNAPSHOT.md`.
-12. Keep `ARCHIVE_PORTFOLIO_RUNBOOK.md` as the repeatable workflow reference.
+12. Review `ARCHIVE_PORTFOLIO_READINESS_REVIEW.md`.
+13. Keep `ARCHIVE_PORTFOLIO_RUNBOOK.md` as the repeatable workflow reference.
 
 ## Expected Portfolio Files
 
@@ -234,6 +251,8 @@ The final archive portfolio workspace can contain these generated files:
 - `ARCHIVE_PORTFOLIO_DIGEST.md`
 - `archive_portfolio_snapshot.json`
 - `ARCHIVE_PORTFOLIO_SNAPSHOT.md`
+- `archive_portfolio_readiness_review.json`
+- `ARCHIVE_PORTFOLIO_READINESS_REVIEW.md`
 - `archive_portfolio_runbook.json`
 - `ARCHIVE_PORTFOLIO_RUNBOOK.md`
 
@@ -241,10 +260,12 @@ The final archive portfolio workspace can contain these generated files:
 
 - `ready`: all expected portfolio boards are available and no board needs attention.
 - `needs-attention`: at least one board, packlist item, indexed file, dashboard source, digest source, or snapshot file is missing or reports incomplete work.
+- `ready-for-final-review`: the readiness review found no missing source files and all checks passed.
+- `needs-review`: the readiness review found missing source files or failed checks.
 - `archive-ready`: a project or board is ready for archive review.
 - `complete`: the packlist, index, or snapshot found every expected portfolio and project file.
 - `incomplete`: completion checks found missing source files or unfinished closeout/feedback/archive items.
 
 ## Best Practice
 
-Run the individual project tools first, then run the board tools, then run the portfolio summary, then the portfolio packlist, then the portfolio index, then the portfolio dashboard, then the portfolio digest, and finally the portfolio snapshot. This keeps board-level reports accurate, gives leaders one short executive review file, and records the final archive package state at the end.
+Run the individual project tools first, then run the board tools, then run the portfolio summary, then the portfolio packlist, then the portfolio index, then the portfolio dashboard, then the portfolio digest, then the portfolio snapshot, and finally the readiness review. This keeps board-level reports accurate, gives leaders one short executive review file, records the final archive package state, and ends with one checklist that shows whether the package is ready for final human review.
