@@ -77,6 +77,12 @@ RUNBOOK_STEPS = [
         'output': 'ARCHIVE_PORTFOLIO_DIGEST.md',
         'purpose': 'Build the executive archive portfolio digest for final review.',
     },
+    {
+        'name': 'portfolio-snapshot',
+        'command': ['python', 'extras/archive_portfolio_snapshot.py', '--projects-root', '{projects_root}', '--label', 'archive-portfolio-final', '--out-json', 'archive_portfolio_snapshot.json', '--out-md', 'ARCHIVE_PORTFOLIO_SNAPSHOT.md'],
+        'output': 'ARCHIVE_PORTFOLIO_SNAPSHOT.md',
+        'purpose': 'Build the timestamped final archive portfolio snapshot manifest.',
+    },
 ]
 
 
