@@ -216,6 +216,12 @@ TOOLS = {
         'description': 'Generate platform publishing instructions',
         'area': 'publishing',
     },
+    'content-review': {
+        'script': 'extras/content_risk_checker.py',
+        'example': 'python extras/content_risk_checker.py --project projects/demo-video',
+        'description': 'Run content review checks for project metadata and script text',
+        'area': 'review',
+    },
     'feature-registry': {
         'script': 'extras/feature_registry.py',
         'example': 'python extras/feature_registry.py summary',
