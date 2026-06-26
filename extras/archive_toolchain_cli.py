@@ -148,6 +148,12 @@ TOOLS = {
         'description': 'Build executive archive portfolio digest from dashboard, summary, packlist, and index files',
         'area': 'portfolio',
     },
+    'portfolio-snapshot': {
+        'script': 'extras/archive_portfolio_snapshot.py',
+        'example': 'python extras/archive_portfolio_snapshot.py --projects-root projects --label archive-portfolio-final --out-json archive_portfolio_snapshot.json --out-md ARCHIVE_PORTFOLIO_SNAPSHOT.md',
+        'description': 'Build timestamped final archive portfolio snapshot manifest for markdown and JSON outputs',
+        'area': 'portfolio',
+    },
 }
 
 
