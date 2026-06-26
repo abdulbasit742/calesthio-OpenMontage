@@ -113,6 +113,12 @@ RUNBOOK_STEPS = [
         'output': 'ARCHIVE_PORTFOLIO_RETENTION_POLICY.md',
         'purpose': 'Build final archive portfolio retention policy and cleanup governance record.',
     },
+    {
+        'name': 'portfolio-retention-review',
+        'command': ['python', 'extras/archive_portfolio_retention_review.py', '--projects-root', '{projects_root}', '--reviewer-name', '{sender_name}', '--review-note', 'Retention policy review', '--out-json', 'archive_portfolio_retention_review.json', '--out-md', 'ARCHIVE_PORTFOLIO_RETENTION_REVIEW.md'],
+        'output': 'ARCHIVE_PORTFOLIO_RETENTION_REVIEW.md',
+        'purpose': 'Build final archive portfolio retention review and approval checklist.',
+    },
 ]
 
 
