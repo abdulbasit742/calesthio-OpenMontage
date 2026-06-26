@@ -190,6 +190,12 @@ TOOLS = {
         'description': 'Build archive portfolio retention review and approval checklist from retention policy files',
         'area': 'portfolio',
     },
+    'portfolio-governance-summary': {
+        'script': 'extras/archive_portfolio_governance_summary.py',
+        'example': 'python extras/archive_portfolio_governance_summary.py --projects-root projects --summary-label archive-portfolio-governance-summary --owner-name ArchiveOwner --out-json archive_portfolio_governance_summary.json --out-md ARCHIVE_PORTFOLIO_GOVERNANCE_SUMMARY.md',
+        'description': 'Build one-page archive portfolio governance summary from retention, handoff, release, and readiness records',
+        'area': 'portfolio',
+    },
 }
 
 
