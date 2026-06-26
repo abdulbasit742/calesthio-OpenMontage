@@ -119,6 +119,12 @@ RUNBOOK_STEPS = [
         'output': 'ARCHIVE_PORTFOLIO_RETENTION_REVIEW.md',
         'purpose': 'Build final archive portfolio retention review and approval checklist.',
     },
+    {
+        'name': 'portfolio-governance-summary',
+        'command': ['python', 'extras/archive_portfolio_governance_summary.py', '--projects-root', '{projects_root}', '--summary-label', 'archive-portfolio-governance-summary', '--owner-name', '{sender_name}', '--out-json', 'archive_portfolio_governance_summary.json', '--out-md', 'ARCHIVE_PORTFOLIO_GOVERNANCE_SUMMARY.md'],
+        'output': 'ARCHIVE_PORTFOLIO_GOVERNANCE_SUMMARY.md',
+        'purpose': 'Build final one-page archive portfolio governance summary.',
+    },
 ]
 
 
