@@ -178,6 +178,12 @@ TOOLS = {
         'description': 'Build archive portfolio handoff receipt and acknowledgement record from handoff package files',
         'area': 'portfolio',
     },
+    'portfolio-retention-policy': {
+        'script': 'extras/archive_portfolio_retention_policy.py',
+        'example': 'python extras/archive_portfolio_retention_policy.py --projects-root projects --policy-label archive-portfolio-retention-policy --owner-name ArchiveOwner --out-json archive_portfolio_retention_policy.json --out-md ARCHIVE_PORTFOLIO_RETENTION_POLICY.md',
+        'description': 'Build archive portfolio retention policy with retention groups, review cadence, and cleanup rules',
+        'area': 'portfolio',
+    },
 }
 
 
