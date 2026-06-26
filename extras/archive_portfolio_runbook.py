@@ -15,7 +15,7 @@ RUNBOOK_STEPS = [
         'name': 'portfolio-archive-plan',
         'command': ['python', 'extras/portfolio_archive_plan.py', '--projects-root', '{projects_root}', '--client-name', '{client_name}', '--sender-name', '{sender_name}', '--out-json', 'portfolio_archive_plan.json', '--out-md', 'PORTFOLIO_ARCHIVE_PLAN.md'],
         'output': 'PORTFOLIO_ARCHIVE_PLAN.md',
-        'purpose': 'Generate safe per-project archive ops commands.',
+        'purpose': 'Generate per-project archive ops commands.',
     },
     {
         'name': 'archive-status-board',
@@ -27,7 +27,7 @@ RUNBOOK_STEPS = [
         'name': 'archive-badge-plan',
         'command': ['python', 'extras/archive_badge_plan.py', '--projects-root', '{projects_root}', '--out-json', 'archive_badge_plan.json', '--out-md', 'ARCHIVE_BADGE_PLAN.md'],
         'output': 'ARCHIVE_BADGE_PLAN.md',
-        'purpose': 'Generate safe per-project archive badge commands.',
+        'purpose': 'Generate per-project archive badge commands.',
     },
     {
         'name': 'archive-badge-board',
@@ -39,7 +39,7 @@ RUNBOOK_STEPS = [
         'name': 'archive-completion-plan',
         'command': ['python', 'extras/archive_completion_plan.py', '--projects-root', '{projects_root}', '--out-json', 'archive_completion_plan.json', '--out-md', 'ARCHIVE_COMPLETION_PLAN.md'],
         'output': 'ARCHIVE_COMPLETION_PLAN.md',
-        'purpose': 'Generate safe per-project archive completion commands.',
+        'purpose': 'Generate per-project archive completion commands.',
     },
     {
         'name': 'archive-completion-board',
@@ -51,37 +51,43 @@ RUNBOOK_STEPS = [
         'name': 'portfolio-summary',
         'command': ['python', 'extras/archive_portfolio_summary.py', '--out-json', 'archive_portfolio_summary.json', '--out-md', 'ARCHIVE_PORTFOLIO_SUMMARY.md'],
         'output': 'ARCHIVE_PORTFOLIO_SUMMARY.md',
-        'purpose': 'Build final portfolio archive summary from all boards.',
+        'purpose': 'Build portfolio archive summary from all boards.',
     },
     {
         'name': 'portfolio-packlist',
         'command': ['python', 'extras/archive_portfolio_packlist.py', '--projects-root', '{projects_root}', '--out-json', 'archive_portfolio_packlist.json', '--out-md', 'ARCHIVE_PORTFOLIO_PACKLIST.md'],
         'output': 'ARCHIVE_PORTFOLIO_PACKLIST.md',
-        'purpose': 'Build the final portfolio and per-project archive file checklist.',
+        'purpose': 'Build portfolio and per-project archive file checklist.',
     },
     {
         'name': 'portfolio-index',
         'command': ['python', 'extras/archive_portfolio_index.py', '--projects-root', '{projects_root}', '--out-json', 'archive_portfolio_index.json', '--out-md', 'ARCHIVE_PORTFOLIO_INDEX.md'],
         'output': 'ARCHIVE_PORTFOLIO_INDEX.md',
-        'purpose': 'Build the searchable final archive portfolio document index.',
+        'purpose': 'Build searchable archive portfolio document index.',
     },
     {
         'name': 'portfolio-dashboard',
         'command': ['python', 'extras/archive_portfolio_dashboard.py', '--projects-root', '{projects_root}', '--out-json', 'archive_portfolio_dashboard.json', '--out-md', 'ARCHIVE_PORTFOLIO_DASHBOARD.md'],
         'output': 'ARCHIVE_PORTFOLIO_DASHBOARD.md',
-        'purpose': 'Build the one-page final archive portfolio status dashboard.',
+        'purpose': 'Build archive portfolio status dashboard.',
     },
     {
         'name': 'portfolio-digest',
         'command': ['python', 'extras/archive_portfolio_digest.py', '--projects-root', '{projects_root}', '--out-json', 'archive_portfolio_digest.json', '--out-md', 'ARCHIVE_PORTFOLIO_DIGEST.md'],
         'output': 'ARCHIVE_PORTFOLIO_DIGEST.md',
-        'purpose': 'Build the executive archive portfolio digest for final review.',
+        'purpose': 'Build executive archive portfolio digest.',
     },
     {
         'name': 'portfolio-snapshot',
         'command': ['python', 'extras/archive_portfolio_snapshot.py', '--projects-root', '{projects_root}', '--label', 'archive-portfolio-final', '--out-json', 'archive_portfolio_snapshot.json', '--out-md', 'ARCHIVE_PORTFOLIO_SNAPSHOT.md'],
         'output': 'ARCHIVE_PORTFOLIO_SNAPSHOT.md',
-        'purpose': 'Build the timestamped final archive portfolio snapshot manifest.',
+        'purpose': 'Build timestamped archive portfolio snapshot manifest.',
+    },
+    {
+        'name': 'portfolio-readiness-review',
+        'command': ['python', 'extras/archive_portfolio_readiness_review.py', '--projects-root', '{projects_root}', '--out-json', 'archive_portfolio_readiness_review.json', '--out-md', 'ARCHIVE_PORTFOLIO_READINESS_REVIEW.md'],
+        'output': 'ARCHIVE_PORTFOLIO_READINESS_REVIEW.md',
+        'purpose': 'Build archive portfolio readiness checklist.',
     },
 ]
 
@@ -155,7 +161,7 @@ def write_runbook(runbook, out_json, out_md):
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Build a safe archive portfolio runbook for OpenMontage Plus')
+    parser = argparse.ArgumentParser(description='Build an archive portfolio runbook for OpenMontage Plus')
     parser.add_argument('--projects-root', default='projects')
     parser.add_argument('--client-name', default='')
     parser.add_argument('--sender-name', default='')
