@@ -53,6 +53,12 @@ RUNBOOK_STEPS = [
         'output': 'ARCHIVE_PORTFOLIO_SUMMARY.md',
         'purpose': 'Build final portfolio archive summary from all boards.',
     },
+    {
+        'name': 'portfolio-packlist',
+        'command': ['python', 'extras/archive_portfolio_packlist.py', '--projects-root', '{projects_root}', '--out-json', 'archive_portfolio_packlist.json', '--out-md', 'ARCHIVE_PORTFOLIO_PACKLIST.md'],
+        'output': 'ARCHIVE_PORTFOLIO_PACKLIST.md',
+        'purpose': 'Build the final portfolio and per-project archive file checklist.',
+    },
 ]
 
 
