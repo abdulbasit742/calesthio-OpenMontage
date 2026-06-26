@@ -101,6 +101,12 @@ RUNBOOK_STEPS = [
         'output': 'ARCHIVE_PORTFOLIO_HANDOFF_NOTE.md',
         'purpose': 'Build final archive portfolio handoff note.',
     },
+    {
+        'name': 'portfolio-handoff-receipt',
+        'command': ['python', 'extras/archive_portfolio_handoff_receipt.py', '--projects-root', '{projects_root}', '--recipient-name', '{client_name}', '--sender-name', '{sender_name}', '--receipt-label', 'archive-portfolio-receipt', '--out-json', 'archive_portfolio_handoff_receipt.json', '--out-md', 'ARCHIVE_PORTFOLIO_HANDOFF_RECEIPT.md'],
+        'output': 'ARCHIVE_PORTFOLIO_HANDOFF_RECEIPT.md',
+        'purpose': 'Build final archive portfolio handoff receipt and acknowledgement record.',
+    },
 ]
 
 
