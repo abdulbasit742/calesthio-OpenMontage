@@ -228,6 +228,12 @@ TOOLS = {
         'description': 'Generate roadmap JSON and Markdown reports',
         'area': 'roadmap',
     },
+    'toolchain-audit': {
+        'script': 'extras/toolchain_audit.py',
+        'example': 'python extras/toolchain_audit.py --cli extras/plus_cli.py',
+        'description': 'Audit registered Plus CLI tools and missing scripts',
+        'area': 'roadmap',
+    },
 }
 
 
