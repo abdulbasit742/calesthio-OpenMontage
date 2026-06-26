@@ -48,6 +48,8 @@ FEATURES = [
     {'number': 43, 'name': 'Plus toolchain guide', 'area': 'documentation', 'status': 'completed'},
     {'number': 44, 'name': 'Toolchain audit report generator', 'area': 'roadmap', 'status': 'completed'},
     {'number': 45, 'name': 'Toolchain audit CLI integration and registry sync', 'area': 'cli', 'status': 'completed'},
+    {'number': 46, 'name': 'Content risk checker', 'area': 'review', 'status': 'completed'},
+    {'number': 47, 'name': 'Content review CLI integration and registry sync', 'area': 'cli', 'status': 'completed'},
 ]
 
 ROADMAP_THEMES = [
