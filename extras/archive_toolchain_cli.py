@@ -154,6 +154,12 @@ TOOLS = {
         'description': 'Build timestamped final archive portfolio snapshot manifest for markdown and JSON outputs',
         'area': 'portfolio',
     },
+    'portfolio-readiness-review': {
+        'script': 'extras/archive_portfolio_readiness_review.py',
+        'example': 'python extras/archive_portfolio_readiness_review.py --projects-root projects --reviewer-name Reviewer --review-note "Final package review" --out-json archive_portfolio_readiness_review.json --out-md ARCHIVE_PORTFOLIO_READINESS_REVIEW.md',
+        'description': 'Build final archive portfolio readiness review checklist from snapshot, digest, and dashboard files',
+        'area': 'portfolio',
+    },
 }
 
 
