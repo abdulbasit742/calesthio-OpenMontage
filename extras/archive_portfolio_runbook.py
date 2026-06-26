@@ -89,6 +89,12 @@ RUNBOOK_STEPS = [
         'output': 'ARCHIVE_PORTFOLIO_READINESS_REVIEW.md',
         'purpose': 'Build archive portfolio readiness checklist.',
     },
+    {
+        'name': 'portfolio-release-packet',
+        'command': ['python', 'extras/archive_portfolio_release_packet.py', '--projects-root', '{projects_root}', '--packet-label', 'archive-portfolio-release', '--out-json', 'archive_portfolio_release_packet.json', '--out-md', 'ARCHIVE_PORTFOLIO_RELEASE_PACKET.md'],
+        'output': 'ARCHIVE_PORTFOLIO_RELEASE_PACKET.md',
+        'purpose': 'Build final archive portfolio release packet manifest.',
+    },
 ]
 
 
