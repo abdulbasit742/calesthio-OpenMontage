@@ -19,12 +19,13 @@ The goal is to move from single-project archive files to portfolio-level visibil
 11. build a timestamped portfolio snapshot
 12. build a final readiness review checklist
 13. build a final release packet manifest
-14. create a repeatable runbook
-15. use the CLI registry to inspect and call tools
+14. build a final handoff note
+15. create a repeatable runbook
+16. use the CLI registry to inspect and call tools
 
 ## Recommended Full Workflow
 
-Run the portfolio runbook generator first when you want a single Markdown command file. The runbook includes audit, plans, boards, summary, packlist, searchable index, dashboard, executive digest, snapshot, readiness review, and release packet steps.
+Run the portfolio runbook generator first when you want a single Markdown command file. The runbook includes audit, plans, boards, summary, packlist, searchable index, dashboard, executive digest, snapshot, readiness review, release packet, and handoff note steps.
 
 ```bash
 python extras/archive_portfolio_runbook.py --projects-root projects --client-name "Client Name" --sender-name "Your Name" --out-json archive_portfolio_runbook.json --out-md ARCHIVE_PORTFOLIO_RUNBOOK.md
@@ -193,6 +194,19 @@ Main output:
 - `archive_portfolio_release_packet.json`
 - `ARCHIVE_PORTFOLIO_RELEASE_PACKET.md`
 
+## Portfolio Handoff Note
+
+Use this after the release packet is generated. It builds a client/team-ready handoff note from the release packet, readiness review, and digest sources, then lists recommended handoff attachments and next actions.
+
+```bash
+python extras/archive_portfolio_handoff_note.py --projects-root projects --recipient-name "Client Team" --sender-name "Your Name" --handoff-label archive-portfolio-handoff --out-json archive_portfolio_handoff_note.json --out-md ARCHIVE_PORTFOLIO_HANDOFF_NOTE.md
+```
+
+Main output:
+
+- `archive_portfolio_handoff_note.json`
+- `ARCHIVE_PORTFOLIO_HANDOFF_NOTE.md`
+
 ## CLI Registry Usage
 
 The archive CLI can list, inspect, and generate command arrays for the archive tools.
@@ -211,6 +225,7 @@ python extras/archive_toolchain_cli.py show portfolio-digest
 python extras/archive_toolchain_cli.py show portfolio-snapshot
 python extras/archive_toolchain_cli.py show portfolio-readiness-review
 python extras/archive_toolchain_cli.py show portfolio-release-packet
+python extras/archive_toolchain_cli.py show portfolio-handoff-note
 python extras/archive_toolchain_cli.py command archive-completion-board --projects-root projects
 python extras/archive_toolchain_cli.py command portfolio-packlist --projects-root projects
 python extras/archive_toolchain_cli.py command portfolio-index --projects-root projects
@@ -219,6 +234,7 @@ python extras/archive_toolchain_cli.py command portfolio-digest --projects-root 
 python extras/archive_toolchain_cli.py command portfolio-snapshot --projects-root projects --label archive-portfolio-final
 python extras/archive_toolchain_cli.py command portfolio-readiness-review --projects-root projects
 python extras/archive_toolchain_cli.py command portfolio-release-packet --projects-root projects --packet-label archive-portfolio-release
+python extras/archive_toolchain_cli.py command portfolio-handoff-note --projects-root projects --recipient-name Client --sender-name Team --handoff-label archive-portfolio-handoff
 ```
 
 ## Suggested Review Order
@@ -236,7 +252,8 @@ python extras/archive_toolchain_cli.py command portfolio-release-packet --projec
 11. Review `ARCHIVE_PORTFOLIO_SNAPSHOT.md`.
 12. Review `ARCHIVE_PORTFOLIO_READINESS_REVIEW.md`.
 13. Review `ARCHIVE_PORTFOLIO_RELEASE_PACKET.md`.
-14. Keep `ARCHIVE_PORTFOLIO_RUNBOOK.md` as the repeatable workflow reference.
+14. Review `ARCHIVE_PORTFOLIO_HANDOFF_NOTE.md`.
+15. Keep `ARCHIVE_PORTFOLIO_RUNBOOK.md` as the repeatable workflow reference.
 
 ## Expected Portfolio Files
 
@@ -272,15 +289,18 @@ The final archive portfolio workspace can contain these generated files:
 - `ARCHIVE_PORTFOLIO_READINESS_REVIEW.md`
 - `archive_portfolio_release_packet.json`
 - `ARCHIVE_PORTFOLIO_RELEASE_PACKET.md`
+- `archive_portfolio_handoff_note.json`
+- `ARCHIVE_PORTFOLIO_HANDOFF_NOTE.md`
 - `archive_portfolio_runbook.json`
 - `ARCHIVE_PORTFOLIO_RUNBOOK.md`
 
 ## Status Meaning
 
 - `ready`: all expected portfolio boards are available and no board needs attention.
-- `needs-attention`: at least one board, packlist item, indexed file, dashboard source, digest source, snapshot file, or release packet file is missing or reports incomplete work.
+- `needs-attention`: at least one board, packlist item, indexed file, dashboard source, digest source, snapshot file, release packet file, or handoff attachment is missing or reports incomplete work.
 - `ready-for-final-review`: the readiness review found no missing source files and all checks passed.
 - `ready-to-package`: the release packet found all expected packet files and key source statuses are ready.
+- `ready-to-send`: the handoff note found source summaries and handoff attachments available.
 - `needs-review`: the readiness review found missing source files or failed checks.
 - `archive-ready`: a project or board is ready for archive review.
 - `complete`: the packlist, index, or snapshot found every expected portfolio and project file.
@@ -288,4 +308,4 @@ The final archive portfolio workspace can contain these generated files:
 
 ## Best Practice
 
-Run the individual project tools first, then run the board tools, then run the portfolio summary, then the portfolio packlist, then the portfolio index, then the portfolio dashboard, then the portfolio digest, then the portfolio snapshot, then the readiness review, and finally the release packet. This keeps board-level reports accurate, gives leaders one short executive review file, records the final archive package state, checks final readiness, and ends with one package manifest for handoff.
+Run the individual project tools first, then run the board tools, then run the portfolio summary, then the portfolio packlist, then the portfolio index, then the portfolio dashboard, then the portfolio digest, then the portfolio snapshot, then the readiness review, then the release packet, and finally the handoff note. This keeps board-level reports accurate, gives leaders one short executive review file, records the final archive package state, checks final readiness, creates one package manifest, and ends with a ready-to-share handoff note.
