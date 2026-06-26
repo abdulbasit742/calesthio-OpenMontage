@@ -70,6 +70,60 @@ TOOLS = {
         'description': 'Build safe portfolio archive command plan',
         'area': 'portfolio',
     },
+    'toolchain-audit': {
+        'script': 'extras/archive_toolchain_audit.py',
+        'example': 'python extras/archive_toolchain_audit.py --out-json archive_toolchain_audit.json --out-md ARCHIVE_TOOLCHAIN_AUDIT.md',
+        'description': 'Audit archive toolchain scripts, docs, and CLI coverage',
+        'area': 'audit',
+    },
+    'archive-badge': {
+        'script': 'extras/archive_readiness_badge.py',
+        'example': 'python extras/archive_readiness_badge.py --project projects/demo-video',
+        'description': 'Build per-project archive readiness badge',
+        'area': 'badge',
+    },
+    'archive-badge-board': {
+        'script': 'extras/archive_badge_board.py',
+        'example': 'python extras/archive_badge_board.py --projects-root projects',
+        'description': 'Build global archive readiness badge board',
+        'area': 'badge',
+    },
+    'archive-badge-plan': {
+        'script': 'extras/archive_badge_plan.py',
+        'example': 'python extras/archive_badge_plan.py --projects-root projects',
+        'description': 'Build safe per-project archive badge command plan',
+        'area': 'badge',
+    },
+    'archive-completion': {
+        'script': 'extras/archive_completion_report.py',
+        'example': 'python extras/archive_completion_report.py --project projects/demo-video',
+        'description': 'Build final per-project archive completion report',
+        'area': 'completion',
+    },
+    'archive-completion-board': {
+        'script': 'extras/archive_completion_board.py',
+        'example': 'python extras/archive_completion_board.py --projects-root projects',
+        'description': 'Build global archive completion board',
+        'area': 'completion',
+    },
+    'archive-completion-plan': {
+        'script': 'extras/archive_completion_plan.py',
+        'example': 'python extras/archive_completion_plan.py --projects-root projects',
+        'description': 'Build safe per-project archive completion command plan',
+        'area': 'completion',
+    },
+    'portfolio-summary': {
+        'script': 'extras/archive_portfolio_summary.py',
+        'example': 'python extras/archive_portfolio_summary.py --out-json archive_portfolio_summary.json --out-md ARCHIVE_PORTFOLIO_SUMMARY.md',
+        'description': 'Summarize archive boards into one portfolio status report',
+        'area': 'portfolio',
+    },
+    'portfolio-runbook': {
+        'script': 'extras/archive_portfolio_runbook.py',
+        'example': 'python extras/archive_portfolio_runbook.py --projects-root projects --client-name Client --sender-name Team',
+        'description': 'Build the complete safe archive portfolio runbook',
+        'area': 'portfolio',
+    },
 }
 
 
