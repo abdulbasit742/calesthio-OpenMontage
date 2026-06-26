@@ -43,6 +43,11 @@ FEATURES = [
     {'number': 38, 'name': 'Publishing instructions builder', 'area': 'publishing', 'status': 'completed'},
     {'number': 39, 'name': 'SEO keyword planner issue logged', 'area': 'seo', 'status': 'issue-logged', 'issue': 2},
     {'number': 40, 'name': 'Feature registry refresh through feature 40', 'area': 'roadmap', 'status': 'completed'},
+    {'number': 41, 'name': 'Roadmap report generator', 'area': 'roadmap', 'status': 'completed'},
+    {'number': 42, 'name': 'Plus CLI expanded tool launcher', 'area': 'cli', 'status': 'completed'},
+    {'number': 43, 'name': 'Plus toolchain guide', 'area': 'documentation', 'status': 'completed'},
+    {'number': 44, 'name': 'Toolchain audit report generator', 'area': 'roadmap', 'status': 'completed'},
+    {'number': 45, 'name': 'Toolchain audit CLI integration and registry sync', 'area': 'cli', 'status': 'completed'},
 ]
 
 ROADMAP_THEMES = [
