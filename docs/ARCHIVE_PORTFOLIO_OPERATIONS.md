@@ -21,12 +21,13 @@ The goal is to move from single-project archive files to portfolio-level visibil
 13. build a final release packet manifest
 14. build a final handoff note
 15. build a handoff receipt and acknowledgement record
-16. create a repeatable runbook
-17. use the CLI registry to inspect and call tools
+16. build a final retention policy and cleanup governance record
+17. create a repeatable runbook
+18. use the CLI registry to inspect and call tools
 
 ## Recommended Full Workflow
 
-Run the portfolio runbook generator first when you want a single Markdown command file. The runbook includes audit, plans, boards, summary, packlist, searchable index, dashboard, executive digest, snapshot, readiness review, release packet, handoff note, and handoff receipt steps.
+Run the portfolio runbook generator first when you want a single Markdown command file. The runbook includes audit, plans, boards, summary, packlist, searchable index, dashboard, executive digest, snapshot, readiness review, release packet, handoff note, handoff receipt, and retention policy steps.
 
 ```bash
 python extras/archive_portfolio_runbook.py --projects-root projects --client-name "Client Name" --sender-name "Your Name" --out-json archive_portfolio_runbook.json --out-md ARCHIVE_PORTFOLIO_RUNBOOK.md
@@ -221,6 +222,19 @@ Main output:
 - `archive_portfolio_handoff_receipt.json`
 - `ARCHIVE_PORTFOLIO_HANDOFF_RECEIPT.md`
 
+## Portfolio Retention Policy
+
+Use this after the handoff receipt is generated. It builds a retention and cleanup governance record from the handoff receipt, handoff note, release packet, and snapshot sources, then groups key files by owner role, retention period, and review cadence.
+
+```bash
+python extras/archive_portfolio_retention_policy.py --projects-root projects --policy-label archive-portfolio-retention-policy --owner-name "Archive Owner" --out-json archive_portfolio_retention_policy.json --out-md ARCHIVE_PORTFOLIO_RETENTION_POLICY.md
+```
+
+Main output:
+
+- `archive_portfolio_retention_policy.json`
+- `ARCHIVE_PORTFOLIO_RETENTION_POLICY.md`
+
 ## CLI Registry Usage
 
 The archive CLI can list, inspect, and generate command arrays for the archive tools.
@@ -241,6 +255,7 @@ python extras/archive_toolchain_cli.py show portfolio-readiness-review
 python extras/archive_toolchain_cli.py show portfolio-release-packet
 python extras/archive_toolchain_cli.py show portfolio-handoff-note
 python extras/archive_toolchain_cli.py show portfolio-handoff-receipt
+python extras/archive_toolchain_cli.py show portfolio-retention-policy
 python extras/archive_toolchain_cli.py command archive-completion-board --projects-root projects
 python extras/archive_toolchain_cli.py command portfolio-packlist --projects-root projects
 python extras/archive_toolchain_cli.py command portfolio-index --projects-root projects
@@ -251,6 +266,7 @@ python extras/archive_toolchain_cli.py command portfolio-readiness-review --proj
 python extras/archive_toolchain_cli.py command portfolio-release-packet --projects-root projects --packet-label archive-portfolio-release
 python extras/archive_toolchain_cli.py command portfolio-handoff-note --projects-root projects --recipient-name Client --sender-name Team --handoff-label archive-portfolio-handoff
 python extras/archive_toolchain_cli.py command portfolio-handoff-receipt --projects-root projects --recipient-name Client --sender-name Team --receipt-label archive-portfolio-receipt
+python extras/archive_toolchain_cli.py command portfolio-retention-policy --projects-root projects --policy-label archive-portfolio-retention-policy --owner-name ArchiveOwner
 ```
 
 ## Suggested Review Order
@@ -270,7 +286,8 @@ python extras/archive_toolchain_cli.py command portfolio-handoff-receipt --proje
 13. Review `ARCHIVE_PORTFOLIO_RELEASE_PACKET.md`.
 14. Review `ARCHIVE_PORTFOLIO_HANDOFF_NOTE.md`.
 15. Review `ARCHIVE_PORTFOLIO_HANDOFF_RECEIPT.md`.
-16. Keep `ARCHIVE_PORTFOLIO_RUNBOOK.md` as the repeatable workflow reference.
+16. Review `ARCHIVE_PORTFOLIO_RETENTION_POLICY.md`.
+17. Keep `ARCHIVE_PORTFOLIO_RUNBOOK.md` as the repeatable workflow reference.
 
 ## Expected Portfolio Files
 
@@ -310,17 +327,20 @@ The final archive portfolio workspace can contain these generated files:
 - `ARCHIVE_PORTFOLIO_HANDOFF_NOTE.md`
 - `archive_portfolio_handoff_receipt.json`
 - `ARCHIVE_PORTFOLIO_HANDOFF_RECEIPT.md`
+- `archive_portfolio_retention_policy.json`
+- `ARCHIVE_PORTFOLIO_RETENTION_POLICY.md`
 - `archive_portfolio_runbook.json`
 - `ARCHIVE_PORTFOLIO_RUNBOOK.md`
 
 ## Status Meaning
 
 - `ready`: all expected portfolio boards are available and no board needs attention.
-- `needs-attention`: at least one board, packlist item, indexed file, dashboard source, digest source, snapshot file, release packet file, handoff attachment, or receipt attachment is missing or reports incomplete work.
+- `needs-attention`: at least one board, packlist item, indexed file, dashboard source, digest source, snapshot file, release packet file, handoff attachment, receipt attachment, or retention file is missing or reports incomplete work.
 - `ready-for-final-review`: the readiness review found no missing source files and all checks passed.
 - `ready-to-package`: the release packet found all expected packet files and key source statuses are ready.
 - `ready-to-send`: the handoff note found source summaries and handoff attachments available.
 - `ready-for-acknowledgement`: the handoff receipt found source summaries and receipt attachments available.
+- `ready-for-retention-review`: the retention policy inputs are available and ready for owner review.
 - `needs-review`: the readiness review found missing source files or failed checks.
 - `archive-ready`: a project or board is ready for archive review.
 - `complete`: the packlist, index, or snapshot found every expected portfolio and project file.
@@ -328,4 +348,4 @@ The final archive portfolio workspace can contain these generated files:
 
 ## Best Practice
 
-Run the individual project tools first, then run the board tools, then run the portfolio summary, then the portfolio packlist, then the portfolio index, then the portfolio dashboard, then the portfolio digest, then the portfolio snapshot, then the readiness review, then the release packet, then the handoff note, and finally the handoff receipt. This keeps board-level reports accurate, gives leaders one short executive review file, records the final archive package state, checks final readiness, creates one package manifest, prepares the handoff message, and ends with an acknowledgement record.
+Run the individual project tools first, then run the board tools, then run the portfolio summary, then the portfolio packlist, then the portfolio index, then the portfolio dashboard, then the portfolio digest, then the portfolio snapshot, then the readiness review, then the release packet, then the handoff note, then the handoff receipt, and finally the retention policy. This keeps board-level reports accurate, gives leaders one short executive review file, records the final archive package state, checks final readiness, creates one package manifest, prepares the handoff message, records acknowledgement, and ends with retention governance.
