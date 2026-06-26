@@ -95,6 +95,12 @@ RUNBOOK_STEPS = [
         'output': 'ARCHIVE_PORTFOLIO_RELEASE_PACKET.md',
         'purpose': 'Build final archive portfolio release packet manifest.',
     },
+    {
+        'name': 'portfolio-handoff-note',
+        'command': ['python', 'extras/archive_portfolio_handoff_note.py', '--projects-root', '{projects_root}', '--recipient-name', '{client_name}', '--sender-name', '{sender_name}', '--handoff-label', 'archive-portfolio-handoff', '--out-json', 'archive_portfolio_handoff_note.json', '--out-md', 'ARCHIVE_PORTFOLIO_HANDOFF_NOTE.md'],
+        'output': 'ARCHIVE_PORTFOLIO_HANDOFF_NOTE.md',
+        'purpose': 'Build final archive portfolio handoff note.',
+    },
 ]
 
 
