@@ -65,6 +65,12 @@ RUNBOOK_STEPS = [
         'output': 'ARCHIVE_PORTFOLIO_INDEX.md',
         'purpose': 'Build the searchable final archive portfolio document index.',
     },
+    {
+        'name': 'portfolio-dashboard',
+        'command': ['python', 'extras/archive_portfolio_dashboard.py', '--projects-root', '{projects_root}', '--out-json', 'archive_portfolio_dashboard.json', '--out-md', 'ARCHIVE_PORTFOLIO_DASHBOARD.md'],
+        'output': 'ARCHIVE_PORTFOLIO_DASHBOARD.md',
+        'purpose': 'Build the one-page final archive portfolio status dashboard.',
+    },
 ]
 
 
