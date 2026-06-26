@@ -184,6 +184,12 @@ TOOLS = {
         'description': 'Build archive portfolio retention policy with retention groups, review cadence, and cleanup rules',
         'area': 'portfolio',
     },
+    'portfolio-retention-review': {
+        'script': 'extras/archive_portfolio_retention_review.py',
+        'example': 'python extras/archive_portfolio_retention_review.py --projects-root projects --reviewer-name Reviewer --review-note "Retention policy review" --out-json archive_portfolio_retention_review.json --out-md ARCHIVE_PORTFOLIO_RETENTION_REVIEW.md',
+        'description': 'Build archive portfolio retention review and approval checklist from retention policy files',
+        'area': 'portfolio',
+    },
 }
 
 
