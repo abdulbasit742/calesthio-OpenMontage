@@ -107,6 +107,12 @@ RUNBOOK_STEPS = [
         'output': 'ARCHIVE_PORTFOLIO_HANDOFF_RECEIPT.md',
         'purpose': 'Build final archive portfolio handoff receipt and acknowledgement record.',
     },
+    {
+        'name': 'portfolio-retention-policy',
+        'command': ['python', 'extras/archive_portfolio_retention_policy.py', '--projects-root', '{projects_root}', '--policy-label', 'archive-portfolio-retention-policy', '--owner-name', '{sender_name}', '--out-json', 'archive_portfolio_retention_policy.json', '--out-md', 'ARCHIVE_PORTFOLIO_RETENTION_POLICY.md'],
+        'output': 'ARCHIVE_PORTFOLIO_RETENTION_POLICY.md',
+        'purpose': 'Build final archive portfolio retention policy and cleanup governance record.',
+    },
 ]
 
 
