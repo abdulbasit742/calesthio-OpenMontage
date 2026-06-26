@@ -59,6 +59,12 @@ RUNBOOK_STEPS = [
         'output': 'ARCHIVE_PORTFOLIO_PACKLIST.md',
         'purpose': 'Build the final portfolio and per-project archive file checklist.',
     },
+    {
+        'name': 'portfolio-index',
+        'command': ['python', 'extras/archive_portfolio_index.py', '--projects-root', '{projects_root}', '--out-json', 'archive_portfolio_index.json', '--out-md', 'ARCHIVE_PORTFOLIO_INDEX.md'],
+        'output': 'ARCHIVE_PORTFOLIO_INDEX.md',
+        'purpose': 'Build the searchable final archive portfolio document index.',
+    },
 ]
 
 
