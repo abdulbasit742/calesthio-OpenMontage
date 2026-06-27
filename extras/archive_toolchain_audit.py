@@ -44,6 +44,8 @@ EXPECTED_FILES = [
     {'key': 'governance_final_packet_guide', 'path': 'docs/ARCHIVE_GOVERNANCE_FINAL_PACKET_GUIDE.md', 'category': 'docs'},
     {'key': 'governance_final_packet_cli', 'path': 'extras/archive_governance_final_packet_cli.py', 'category': 'script'},
     {'key': 'governance_final_packet_cli_guide', 'path': 'docs/ARCHIVE_GOVERNANCE_FINAL_PACKET_CLI_GUIDE.md', 'category': 'docs'},
+    {'key': 'governance_final_handoff_note', 'path': 'extras/archive_governance_final_handoff_note.py', 'category': 'script'},
+    {'key': 'governance_final_handoff_note_guide', 'path': 'docs/ARCHIVE_GOVERNANCE_FINAL_HANDOFF_NOTE_GUIDE.md', 'category': 'docs'},
 ]
 
 KEYWORDS = [
@@ -117,13 +119,14 @@ def recommendations(missing, governance_missing):
         return [f"Create or restore missing file: {row['path']}" for row in missing]
     notes = [
         'Archive toolchain files are present.',
-        'Governance scripts, guides, packet, approval record, readiness summary, CLI, appendix, completion record, completion CLI, final packet, and final packet CLI coverage are present.',
+        'Governance scripts, guides, packet, approval record, readiness summary, CLI, appendix, completion record, completion CLI, final packet, final packet CLI, and final handoff note coverage are present.',
         'Run archive_governance_readiness_cli.py show to inspect the readiness summary companion command.',
         'Run archive_governance_readiness_runbook_appendix.py after the governance approval record.',
         'Run archive_governance_completion_record.py after the readiness summary is governance-ready.',
         'Run archive_governance_completion_cli.py show to inspect the completion record companion command.',
         'Run archive_governance_final_packet.py after the completion record is completed.',
         'Run archive_governance_final_packet_cli.py show to inspect the final packet companion command.',
+        'Run archive_governance_final_handoff_note.py after the final packet is final-packet-ready.',
         'Run archive_portfolio_runbook.py to generate the full archive governance workflow.',
     ]
     if governance_missing:
