@@ -30,6 +30,7 @@ EXPECTED_FILES = [
     {'key': 'governance_packet_guide', 'path': 'docs/ARCHIVE_PORTFOLIO_GOVERNANCE_PACKET_GUIDE.md', 'category': 'docs'},
     {'key': 'governance_approval_record', 'path': 'extras/archive_portfolio_governance_approval_record.py', 'category': 'script'},
     {'key': 'governance_approval_record_guide', 'path': 'docs/ARCHIVE_PORTFOLIO_GOVERNANCE_APPROVAL_RECORD_GUIDE.md', 'category': 'docs'},
+    {'key': 'governance_audit_guide', 'path': 'docs/ARCHIVE_TOOLCHAIN_GOVERNANCE_AUDIT_GUIDE.md', 'category': 'docs'},
 ]
 
 KEYWORDS = [
@@ -98,7 +99,7 @@ def recommendations(missing, governance_missing):
         return [f"Create or restore missing file: {row['path']}" for row in missing]
     notes = [
         'Archive toolchain files are present.',
-        'Governance scripts, guides, packet, and approval record coverage are present.',
+        'Governance scripts, guides, packet, approval record, and audit guide coverage are present.',
         'Run archive_toolchain_cli.py list --area portfolio to inspect registered portfolio commands.',
         'Run archive_portfolio_runbook.py to generate the full archive governance workflow.',
     ]
