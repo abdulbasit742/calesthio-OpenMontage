@@ -196,6 +196,12 @@ TOOLS = {
         'description': 'Build one-page archive portfolio governance summary from retention, handoff, release, and readiness records',
         'area': 'portfolio',
     },
+    'portfolio-governance-action-tracker': {
+        'script': 'extras/archive_portfolio_governance_action_tracker.py',
+        'example': 'python extras/archive_portfolio_governance_action_tracker.py --summary archive_portfolio_governance_summary.json --owner-name ArchiveOwner --out-json archive_portfolio_governance_action_tracker.json --out-md ARCHIVE_PORTFOLIO_GOVERNANCE_ACTION_TRACKER.md',
+        'description': 'Build owner-friendly action tracker from governance summary actions',
+        'area': 'portfolio',
+    },
 }
 
 
