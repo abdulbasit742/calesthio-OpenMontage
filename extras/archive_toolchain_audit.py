@@ -50,6 +50,8 @@ EXPECTED_FILES = [
     {'key': 'governance_final_handoff_note_cli_guide', 'path': 'docs/ARCHIVE_GOVERNANCE_FINAL_HANDOFF_NOTE_CLI_GUIDE.md', 'category': 'docs'},
     {'key': 'governance_final_delivery_checklist', 'path': 'extras/archive_governance_final_delivery_checklist.py', 'category': 'script'},
     {'key': 'governance_final_delivery_checklist_guide', 'path': 'docs/ARCHIVE_GOVERNANCE_FINAL_DELIVERY_CHECKLIST_GUIDE.md', 'category': 'docs'},
+    {'key': 'governance_final_delivery_checklist_cli', 'path': 'extras/archive_governance_final_delivery_checklist_cli.py', 'category': 'script'},
+    {'key': 'governance_final_delivery_checklist_cli_guide', 'path': 'docs/ARCHIVE_GOVERNANCE_FINAL_DELIVERY_CHECKLIST_CLI_GUIDE.md', 'category': 'docs'},
 ]
 
 KEYWORDS = [
@@ -123,7 +125,7 @@ def recommendations(missing, governance_missing):
         return [f"Create or restore missing file: {row['path']}" for row in missing]
     notes = [
         'Archive toolchain files are present.',
-        'Governance scripts, guides, packet, approval record, readiness summary, CLI, appendix, completion record, completion CLI, final packet, final packet CLI, final handoff note, final handoff note CLI, and final delivery checklist coverage are present.',
+        'Governance scripts, guides, packet, approval record, readiness summary, CLI, appendix, completion record, completion CLI, final packet, final packet CLI, final handoff note, final handoff note CLI, final delivery checklist, and final delivery checklist CLI coverage are present.',
         'Run archive_governance_readiness_cli.py show to inspect the readiness summary companion command.',
         'Run archive_governance_readiness_runbook_appendix.py after the governance approval record.',
         'Run archive_governance_completion_record.py after the readiness summary is governance-ready.',
@@ -133,6 +135,7 @@ def recommendations(missing, governance_missing):
         'Run archive_governance_final_handoff_note.py after the final packet is final-packet-ready.',
         'Run archive_governance_final_handoff_note_cli.py show to inspect the final handoff note companion command.',
         'Run archive_governance_final_delivery_checklist.py before delivering the archive package.',
+        'Run archive_governance_final_delivery_checklist_cli.py show to inspect the final delivery checklist companion command.',
         'Run archive_portfolio_runbook.py to generate the full archive governance workflow.',
     ]
     if governance_missing:
