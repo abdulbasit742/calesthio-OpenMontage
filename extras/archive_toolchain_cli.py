@@ -208,6 +208,12 @@ TOOLS = {
         'description': 'Build governance board from governance summary and action tracker files',
         'area': 'portfolio',
     },
+    'portfolio-governance-packet': {
+        'script': 'extras/archive_portfolio_governance_packet.py',
+        'example': 'python extras/archive_portfolio_governance_packet.py --packet-label archive-portfolio-governance-packet --out-json archive_portfolio_governance_packet.json --out-md ARCHIVE_PORTFOLIO_GOVERNANCE_PACKET.md',
+        'description': 'Build final governance packet manifest from summary, tracker, board, and guide files',
+        'area': 'portfolio',
+    },
 }
 
 
