@@ -214,6 +214,12 @@ TOOLS = {
         'description': 'Build final governance packet manifest from summary, tracker, board, and guide files',
         'area': 'portfolio',
     },
+    'portfolio-governance-approval-record': {
+        'script': 'extras/archive_portfolio_governance_approval_record.py',
+        'example': 'python extras/archive_portfolio_governance_approval_record.py --packet archive_portfolio_governance_packet.json --reviewer-name ArchiveOwner --reviewer-role Owner --review-note "Governance package reviewed" --out-json archive_portfolio_governance_approval_record.json --out-md ARCHIVE_PORTFOLIO_GOVERNANCE_APPROVAL_RECORD.md',
+        'description': 'Build final governance approval record from governance packet readiness checks',
+        'area': 'portfolio',
+    },
 }
 
 
