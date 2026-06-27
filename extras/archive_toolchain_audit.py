@@ -38,6 +38,8 @@ EXPECTED_FILES = [
     {'key': 'governance_readiness_runbook_appendix_guide', 'path': 'docs/ARCHIVE_GOVERNANCE_READINESS_RUNBOOK_APPENDIX_GUIDE.md', 'category': 'docs'},
     {'key': 'governance_completion_record', 'path': 'extras/archive_governance_completion_record.py', 'category': 'script'},
     {'key': 'governance_completion_record_guide', 'path': 'docs/ARCHIVE_GOVERNANCE_COMPLETION_RECORD_GUIDE.md', 'category': 'docs'},
+    {'key': 'governance_completion_cli', 'path': 'extras/archive_governance_completion_cli.py', 'category': 'script'},
+    {'key': 'governance_completion_cli_guide', 'path': 'docs/ARCHIVE_GOVERNANCE_COMPLETION_CLI_GUIDE.md', 'category': 'docs'},
 ]
 
 KEYWORDS = [
@@ -53,6 +55,7 @@ KEYWORDS = [
     'readiness',
     'appendix',
     'completion',
+    'cli',
 ]
 
 
@@ -109,10 +112,11 @@ def recommendations(missing, governance_missing):
         return [f"Create or restore missing file: {row['path']}" for row in missing]
     notes = [
         'Archive toolchain files are present.',
-        'Governance scripts, guides, packet, approval record, readiness summary, CLI, appendix, and completion record coverage are present.',
+        'Governance scripts, guides, packet, approval record, readiness summary, CLI, appendix, completion record, and completion CLI coverage are present.',
         'Run archive_governance_readiness_cli.py show to inspect the readiness summary companion command.',
         'Run archive_governance_readiness_runbook_appendix.py after the governance approval record.',
         'Run archive_governance_completion_record.py after the readiness summary is governance-ready.',
+        'Run archive_governance_completion_cli.py show to inspect the completion record companion command.',
         'Run archive_portfolio_runbook.py to generate the full archive governance workflow.',
     ]
     if governance_missing:
