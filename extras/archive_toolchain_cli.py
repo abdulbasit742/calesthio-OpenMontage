@@ -202,6 +202,12 @@ TOOLS = {
         'description': 'Build owner-friendly action tracker from governance summary actions',
         'area': 'portfolio',
     },
+    'portfolio-governance-board': {
+        'script': 'extras/archive_portfolio_governance_board.py',
+        'example': 'python extras/archive_portfolio_governance_board.py --summary archive_portfolio_governance_summary.json --tracker archive_portfolio_governance_action_tracker.json --out-json archive_portfolio_governance_board.json --out-md ARCHIVE_PORTFOLIO_GOVERNANCE_BOARD.md',
+        'description': 'Build governance board from governance summary and action tracker files',
+        'area': 'portfolio',
+    },
 }
 
 
