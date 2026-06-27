@@ -125,6 +125,12 @@ RUNBOOK_STEPS = [
         'output': 'ARCHIVE_PORTFOLIO_GOVERNANCE_SUMMARY.md',
         'purpose': 'Build final one-page archive portfolio governance summary.',
     },
+    {
+        'name': 'portfolio-governance-action-tracker',
+        'command': ['python', 'extras/archive_portfolio_governance_action_tracker.py', '--summary', 'archive_portfolio_governance_summary.json', '--owner-name', '{sender_name}', '--out-json', 'archive_portfolio_governance_action_tracker.json', '--out-md', 'ARCHIVE_PORTFOLIO_GOVERNANCE_ACTION_TRACKER.md'],
+        'output': 'ARCHIVE_PORTFOLIO_GOVERNANCE_ACTION_TRACKER.md',
+        'purpose': 'Build final owner action tracker from governance summary actions.',
+    },
 ]
 
 
