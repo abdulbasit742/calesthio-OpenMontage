@@ -31,6 +31,11 @@ EXPECTED_FILES = [
     {'key': 'governance_approval_record', 'path': 'extras/archive_portfolio_governance_approval_record.py', 'category': 'script'},
     {'key': 'governance_approval_record_guide', 'path': 'docs/ARCHIVE_PORTFOLIO_GOVERNANCE_APPROVAL_RECORD_GUIDE.md', 'category': 'docs'},
     {'key': 'governance_audit_guide', 'path': 'docs/ARCHIVE_TOOLCHAIN_GOVERNANCE_AUDIT_GUIDE.md', 'category': 'docs'},
+    {'key': 'governance_readiness_summary', 'path': 'extras/archive_governance_readiness_summary.py', 'category': 'script'},
+    {'key': 'governance_readiness_summary_guide', 'path': 'docs/ARCHIVE_GOVERNANCE_READINESS_SUMMARY_GUIDE.md', 'category': 'docs'},
+    {'key': 'governance_readiness_cli', 'path': 'extras/archive_governance_readiness_cli.py', 'category': 'script'},
+    {'key': 'governance_readiness_runbook_appendix', 'path': 'extras/archive_governance_readiness_runbook_appendix.py', 'category': 'script'},
+    {'key': 'governance_readiness_runbook_appendix_guide', 'path': 'docs/ARCHIVE_GOVERNANCE_READINESS_RUNBOOK_APPENDIX_GUIDE.md', 'category': 'docs'},
 ]
 
 KEYWORDS = [
@@ -43,6 +48,8 @@ KEYWORDS = [
     'governance',
     'packet',
     'approval',
+    'readiness',
+    'appendix',
 ]
 
 
@@ -99,8 +106,9 @@ def recommendations(missing, governance_missing):
         return [f"Create or restore missing file: {row['path']}" for row in missing]
     notes = [
         'Archive toolchain files are present.',
-        'Governance scripts, guides, packet, approval record, and audit guide coverage are present.',
-        'Run archive_toolchain_cli.py list --area portfolio to inspect registered portfolio commands.',
+        'Governance scripts, guides, packet, approval record, readiness summary, CLI, and appendix coverage are present.',
+        'Run archive_governance_readiness_cli.py show to inspect the readiness summary companion command.',
+        'Run archive_governance_readiness_runbook_appendix.py after the governance approval record.',
         'Run archive_portfolio_runbook.py to generate the full archive governance workflow.',
     ]
     if governance_missing:
