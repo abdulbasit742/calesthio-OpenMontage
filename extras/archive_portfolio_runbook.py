@@ -143,6 +143,12 @@ RUNBOOK_STEPS = [
         'output': 'ARCHIVE_PORTFOLIO_GOVERNANCE_PACKET.md',
         'purpose': 'Build final governance packet manifest from summary, tracker, board, and guide files.',
     },
+    {
+        'name': 'portfolio-governance-approval-record',
+        'command': ['python', 'extras/archive_portfolio_governance_approval_record.py', '--packet', 'archive_portfolio_governance_packet.json', '--reviewer-name', '{sender_name}', '--reviewer-role', 'Owner', '--review-note', 'Governance package reviewed', '--out-json', 'archive_portfolio_governance_approval_record.json', '--out-md', 'ARCHIVE_PORTFOLIO_GOVERNANCE_APPROVAL_RECORD.md'],
+        'output': 'ARCHIVE_PORTFOLIO_GOVERNANCE_APPROVAL_RECORD.md',
+        'purpose': 'Build final governance approval record from governance packet readiness checks.',
+    },
 ]
 
 
