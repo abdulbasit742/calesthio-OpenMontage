@@ -137,6 +137,12 @@ RUNBOOK_STEPS = [
         'output': 'ARCHIVE_PORTFOLIO_GOVERNANCE_BOARD.md',
         'purpose': 'Build final governance board from summary and action tracker files.',
     },
+    {
+        'name': 'portfolio-governance-packet',
+        'command': ['python', 'extras/archive_portfolio_governance_packet.py', '--packet-label', 'archive-portfolio-governance-packet', '--out-json', 'archive_portfolio_governance_packet.json', '--out-md', 'ARCHIVE_PORTFOLIO_GOVERNANCE_PACKET.md'],
+        'output': 'ARCHIVE_PORTFOLIO_GOVERNANCE_PACKET.md',
+        'purpose': 'Build final governance packet manifest from summary, tracker, board, and guide files.',
+    },
 ]
 
 
