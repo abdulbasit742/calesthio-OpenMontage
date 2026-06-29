@@ -9,3 +9,7 @@ Simple docs note.
 ## Use
 
 Keep available.
+
+## Status
+
+Ready.
