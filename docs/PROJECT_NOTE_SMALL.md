@@ -9,3 +9,7 @@ Simple note for docs.
 ## Follow Up
 
 Keep this note available.
+
+## Use
+
+Keep available.
