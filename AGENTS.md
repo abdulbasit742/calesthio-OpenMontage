@@ -2,43 +2,40 @@
 
 ## Scope
 
-These instructions apply to the entire `abdulbasit742/calesthio-OpenMontage` repository. More specific AGENTS.md or AGENTS.override.md files in subdirectories may refine them.
+These instructions apply to the entire `abdulbasit742/calesthio-OpenMontage` repository.
 
-Project: **OpenMontage Plus Fork**.
+Project: **OpenMontage Plus**, currently a helper/tooling layer with a pinned, review-only upstream staging workflow. The upstream OpenMontage application has not yet been merged.
 
-Detected root stack: **Documentation or source repository without a supported root package manifest**.
+## Source boundaries
 
-## Working method
+- `upstream/openmontage.lock.json` is the reviewed source lock.
+- `scripts/openmontage_import.py` may stage and verify source only; it must never apply, overwrite, or delete tracked fork files.
+- `.openmontage-import/` contains ignored review artifacts and is the only allowed staging root.
+- `extras/` contains independent Plus helpers. They must not publish, upload, send messages, or consume paid services without explicit operator action.
 
-1. Read README.md, the relevant manifests, and nearby tests before editing.
-2. Check the current diff and preserve unrelated user changes.
-3. Make the smallest coherent change that solves the task; follow existing names, patterns, and directory boundaries.
-4. Do not hand-edit generated, vendored, dependency, build-output, model-weight, or dataset files unless the task explicitly targets them.
-5. Update tests and documentation when behavior, configuration, public APIs, or setup steps change.
+## Verified commands
 
-## Commands
+```bash
+python -m unittest discover -s tests -p 'test_*.py' -v
+python scripts/repository_check.py
+python -m py_compile scripts/openmontage_import.py scripts/repository_check.py tests/test_openmontage_import.py
+bash -n scripts/import_openmontage_plus.sh
+```
 
-- Read README.md and inspect nested directories for package.json, pyproject.toml, requirements.txt, Dockerfiles, Makefiles, or service-specific instructions.
-- Do not invent build, test, deployment, or migration commands. Record newly verified commands in README.md or a nested AGENTS.md.
+## Upstream import rules
 
-## Verification
-
-- Run the narrowest relevant test first, then the repository's available lint, type-check, test, and build commands.
-- Never report a check as passed unless it was actually run. State skipped checks and the concrete reason.
-- For UI changes, verify loading, empty, error, and success states plus keyboard access and responsive layout.
-- For API or persistence changes, verify validation, authorization, failure behavior, and backward compatibility.
-
-## Security and side effects
-
-- Never commit secrets, tokens, passwords, private keys, production data, or populated environment files. Use documented environment variables and sanitized examples.
-- Treat migrations, deployments, billing, live network calls, account changes, destructive Git operations, and external messages as side effects. Do not perform them without explicit task authorization.
-- Validate untrusted input at trust boundaries and avoid logging credentials, personal data, prompts containing secrets, or raw third-party payloads.
-- AI/model integrations: keep provider credentials server-side, validate model output before side effects, use bounded retries/timeouts, and retain a deterministic non-AI failure path.
-- Messaging/publishing: default to mocks or dry-run mode. Never send messages, publish posts, contact users, or consume paid quotas unless the task explicitly authorizes the exact target and action.
+1. Never use a floating branch or mutable tag as the import source; pin a full commit SHA.
+2. Review the upstream commit and verify the AGPL-3.0 license before changing the lock.
+3. Require a clean tracked working tree before staging.
+4. Reject symbolic links and unsafe stage paths.
+5. Preserve provenance, fork HEAD, conflict inventory, and per-file hashes.
+6. Never reintroduce repository-root `rsync --delete`, broad copy/delete synchronization, fixed shared temporary paths, or an automatic apply command.
+7. Review staged conflicts manually on a dedicated branch. Preserve upstream license and attribution.
+8. After source import, discover and run the upstream project's documented install, test, lint, migration, and build commands before claiming readiness.
 
 ## Completion checklist
 
-- The requested behavior is implemented with a focused diff.
-- Relevant automated checks pass, or any unavailable checks are clearly identified.
-- No secrets, generated artifacts, or unrelated formatting churn were introduced.
-- The final handoff summarizes changed files, verification evidence, risks, and any follow-up work.
+- Import safety tests and repository check pass.
+- Staging remains review-only and ignored by Git.
+- Any lock update names the reviewed commit and license blob.
+- Documentation records new conflicts, dependencies, licenses, and residual risks.
