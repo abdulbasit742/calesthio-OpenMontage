@@ -1,47 +1,50 @@
-name: OpenMontage Plus Smoke Test
+name: Verify OpenMontage Plus
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
-    branches:
-      - main
   workflow_dispatch:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: openmontage-plus-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  smoke:
+  verify:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
-
-      - name: Check Python syntax
+          python-version: ${{ matrix.python-version }}
+      - name: Compile Python and validate shell
         run: |
-          python -m py_compile extras/project_starter.py
-          python -m py_compile extras/workspace_manager.py
-          python -m py_compile extras/export_presets.py
-          python -m py_compile extras/budget_gate.py
-          python -m py_compile extras/render_history.py
-          python -m py_compile extras/review_checklist.py
-          python -m py_compile extras/local_zero_cost.py
-          python -m py_compile extras/plus_cli.py
-
-      - name: Run Plus helper smoke commands
+          find extras scripts tests -type f -name '*.py' -print0 | xargs -0 python -m py_compile
+          bash -n scripts/import_openmontage_plus.sh
+      - name: Run import safety tests
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Run repository safety check
+        run: python scripts/repository_check.py
+      - name: Smoke-test existing Plus helpers in an isolated directory
+        shell: bash
         run: |
-          python extras/project_starter.py --name "Smoke Video" --duration 30 --platform youtube-shorts
-          python extras/workspace_manager.py summary
-          python extras/export_presets.py list
-          python extras/export_presets.py show --preset youtube-shorts
-          python extras/budget_gate.py --budget 1.00
-          python extras/render_history.py add --project smoke-video --status completed --duration-seconds 30 --cost-usd 0 --note smoke
-          python extras/render_history.py summary
-          python extras/review_checklist.py template --file projects/smoke-video/review_checklist.json
-          python extras/review_checklist.py check --file projects/smoke-video/review_checklist.json || true
-          python extras/local_zero_cost.py detect
-          python extras/plus_cli.py list
+          smoke_dir="$(mktemp -d)"
+          cd "$smoke_dir"
+          python "$GITHUB_WORKSPACE/extras/project_starter.py" --name "Smoke Video" --duration 30 --platform youtube-shorts
+          python "$GITHUB_WORKSPACE/extras/workspace_manager.py" summary
+          python "$GITHUB_WORKSPACE/extras/export_presets.py" list
+          python "$GITHUB_WORKSPACE/extras/export_presets.py" show --preset youtube-shorts
+          python "$GITHUB_WORKSPACE/extras/budget_gate.py" --budget 1.00
+          python "$GITHUB_WORKSPACE/extras/render_history.py" add --project smoke-video --status completed --duration-seconds 30 --cost-usd 0 --note smoke
+          python "$GITHUB_WORKSPACE/extras/render_history.py" summary
+          python "$GITHUB_WORKSPACE/extras/review_checklist.py" template --file projects/smoke-video/review_checklist.json
+          python "$GITHUB_WORKSPACE/extras/review_checklist.py" check --file projects/smoke-video/review_checklist.json || true
+          python "$GITHUB_WORKSPACE/extras/local_zero_cost.py" detect
+          python "$GITHUB_WORKSPACE/extras/plus_cli.py" list
